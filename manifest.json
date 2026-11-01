@@ -5,7 +5,7 @@
   "display": "standalone",
   "name": "Resourcesdeck",
   "orientation": "any",
-  "scope": "/",
+  "scope": "/Resources-Deck/",
   "short_name": "Resourcesdeck",
   "start_url": "/Resources-Deck/",
   "theme_color": "#ffffff",
