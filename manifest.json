@@ -7,7 +7,7 @@
   "orientation": "any",
   "scope": "/",
   "short_name": "Resourcesdeck",
-  "start_url": "/",
+  "start_url": "/Resources-Deck/",
   "theme_color": "#ffffff",
   "icons": [
     {
