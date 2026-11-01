@@ -1,0 +1,38 @@
+{
+  "background_color": "#ffffff",
+  "description": "Students ke liye Books, Notes aur Study Materials Buy aur Rent karne ka platform. Notes, booklets aur study material order karein — order confirm hote hi WhatsApp par ek click mein bhejein.",
+  "dir": "ltr",
+  "display": "standalone",
+  "name": "Resourcesdeck",
+  "orientation": "any",
+  "scope": "/",
+  "short_name": "Resourcesdeck",
+  "start_url": "/",
+  "theme_color": "#ffffff",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,&lt;svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'&gt;&lt;rect x='6' y='2' width='20' height='28' rx='4' fill='%2314261E' transform='rotate(-8 16 16)'/&gt;&lt;rect x='9' y='4' width='20' height='28' rx='4' fill='%23F3EEE3' transform='rotate(6 16 16)'/&gt;&lt;circle cx='19' cy='18' r='5' fill='%231FBF63'/&gt;&lt;/svg&gt;",
+      "isSquare": false,
+      "isPng": false,
+      "isWebp": false,
+      "isJpg": false,
+      "width": 0,
+      "is512x512": false,
+      "is256x256": false,
+      "is192x192": false
+    },
+    {
+      "src": "https://musical-centaur-527bfc.netlify.app/favicon.ico",
+      "type": "image/x-icon",
+      "isSquare": false,
+      "isPng": false,
+      "isWebp": false,
+      "isJpg": false,
+      "width": 0,
+      "is512x512": false,
+      "is256x256": false,
+      "is192x192": false
+    }
+  ],
+  "id": "Resourcesdeck"
+}
