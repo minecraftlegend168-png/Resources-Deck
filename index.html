@@ -139,3 +139,240 @@ renderProducts();renderCart();
 </script>
 </body>
 </html>
+<body>
+<header>
+  <div class="head">
+    <div>
+      <div class="brand">📚 Resources Deck</div>
+      <div class="tag">Students Buy & Rent Study Materials</div>
+    </div>
+    <nav>
+      <button class="active" onclick="showPage('store',this)">Store</button>
+      <button onclick="showPage('cart',this)">Cart 🛒</button>
+      <button onclick="showPage('owner',this)">Owner</button>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section id="store">
+  <div class="hero">
+    <h1>Welcome to Resources Deck!</h1>
+    <p>किताबें और पढ़ाई का सामान आसानी से खरीदें या किराये पर लें।</p>
+  </div>
+
+  <div class="toolbar">
+    <input id="search" placeholder="Search products..." oninput="renderProducts()">
+    <select id="category" onchange="renderProducts()">
+      <option value="">All Categories</option>
+      <option>Books</option>
+      <option>Stationery</option>
+      <option>Bags</option>
+      <option>Electronics</option>
+      <option>Uniforms</option>
+    </select>
+  </div>
+
+  <div id="products" class="grid"></div>
+</section>
+
+<section id="cart" class="hidden">
+  <div class="hero">
+    <h1>🛒 Your Cart</h1>
+    <p>अपने चुने हुए सामान की जानकारी देखें।</p>
+  </div>
+  <div class="panel">
+    <div id="cartItems"></div>
+    <div id="cartTotal" class="total">Total: ₹0</div>
+    <button class="primary" onclick="showCheckout()">Proceed to Order</button>
+  </div>
+
+  <div id="checkout" class="panel hidden">
+    <h2>Delivery Details</h2>
+    <div class="form-grid">
+      <div class="field">
+        <label>Customer Name</label>
+        <input id="customerName" placeholder="अपना नाम लिखें">
+      </div>
+      <div class="field">
+        <label>Mobile Number</label>
+        <input id="customerPhone" type="tel" maxlength="10" placeholder="10 digit mobile number">
+      </div>
+      <div class="field full">
+        <label>Full Delivery Address</label>
+        <textarea id="customerAddress" rows="3" placeholder="पूरा पता लिखें"></textarea>
+      </div>
+    </div>
+    <div class="notice">Payment Method: केवल Cash on Delivery (COD)</div>
+    <button class="primary" onclick="placeOrder()">Confirm Order on WhatsApp</button>
+  </div>
+</section>
+
+<section id="owner" class="hidden">
+  <div class="hero">
+    <h1>⚙️ Owner Dashboard</h1>
+    <p>अपने प्रोडक्ट जोड़ें, कीमत बदलें और सामान हटाएँ।</p>
+  </div>
+
+  <div id="ownerLogin" class="panel">
+    <h3>Owner Login</h3>
+    <div class="field">
+      <label>Owner Password</label>
+      <input id="ownerPassword" type="password" placeholder="Password">
+    </div>
+    <button class="primary" onclick="loginOwner()">Login</button>
+  </div>
+
+  <div id="ownerPanel" class="panel hidden">
+    <h2>Add / Edit Product</h2>
+    <input id="editId" type="hidden">
+    <div class="form-grid">
+      <div class="field">
+        <label>Product Name</label>
+        <input id="pName" placeholder="Product name">
+      </div>
+      <div class="field">
+        <label>Category</label>
+        <select id="pCategory">
+          <option>Books</option>
+          <option>Stationery</option>
+          <option>Bags</option>
+          <option>Electronics</option>
+          <option>Uniforms</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Buy Price (₹)</label>
+        <input id="pBuy" type="number" min="1" placeholder="Buy price">
+      </div>
+      <div class="field">
+        <label>Rent Price Per Day (₹1–₹30)</label>
+        <input id="pRent" type="number" min="0" max="30" placeholder="Rent price">
+      </div>
+      <div class="field">
+        <label>Product Emoji</label>
+        <input id="pEmoji" placeholder="📘">
+      </div>
+      <div class="field">
+        <label>Image URL (optional)</label>
+        <input id="pImage" placeholder="Image link">
+      </div>
+    </div>
+    <div class="actions" style="margin-top:14px">
+      <button class="primary" onclick="saveProduct()">Save Product</button>
+      <button class="secondary" onclick="clearProductForm()">Clear Form</button>
+      <button class="danger" onclick="logoutOwner()">Logout</button>
+    </div>
+    <hr>
+    <h3>Manage Products</h3>
+    <div id="manageProducts"></div>
+  </div>
+</section>
+</main>
+
+<footer>© 2026 Resources Deck | Student Marketplace</footer>
+
+<script>
+const OWNER_PASSWORD = "CHANGE_THIS_TO_A_NEW_PASSWORD";
+const WHATSAPP_NUMBER = "919582398579";
+
+const defaultProducts = [
+{id:1,name:"NCERT Science Book",cat:"Books",emoji:"📘",buy:95,rent:8},
+{id:2,name:"Mathematics Textbook",cat:"Books",emoji:"📗",buy:120,rent:10},
+{id:3,name:"Student Stationery Kit",cat:"Stationery",emoji:"✏️",buy:180,rent:0},
+{id:4,name:"Everyday School Backpack",cat:"Bags",emoji:"🎒",buy:650,rent:25},
+{id:5,name:"Scientific Calculator",cat:"Electronics",emoji:"🧮",buy:850,rent:30},
+{id:6,name:"Geometry Box",cat:"Stationery",emoji:"📐",buy:90,rent:5},
+{id:7,name:"Exam Preparation Guide",cat:"Books",emoji:"📚",buy:220,rent:12}
+];
+
+let products = JSON.parse(localStorage.getItem("rd_products") || "null") || defaultProducts;
+let cart = [];
+
+function saveData(){
+  localStorage.setItem("rd_products",JSON.stringify(products));
+}
+
+function showPage(page,btn){
+  document.querySelectorAll("main section").forEach(s=>s.classList.add("hidden"));
+  document.getElementById(page).classList.remove("hidden");
+  document.querySelectorAll("nav button").forEach(b=>b.classList.remove("active"));
+  if(btn) btn.classList.add("active");
+  if(page==="cart") renderCart();
+  if(page==="owner") renderManage();
+}
+
+function renderProducts(){
+  const search=document.getElementById("search").value.toLowerCase();
+  const cat=document.getElementById("category").value;
+  const list=products.filter(p=>
+    p.name.toLowerCase().includes(search) && (!cat || p.cat===cat)
+  );
+  document.getElementById("products").innerHTML=list.map(p=>`
+    <div class="card">
+      <div class="pic">${p.image?`<img src="${p.image}" alt="">`:p.emoji||"📦"}</div>
+      <h3>${p.name}</h3>
+      <div class="muted">${p.cat}</div>
+      <div class="price">Buy: ₹${p.buy}
+      ${p.rent>0?`<br>Rent: ₹${p.rent}/day`:""}</div>
+      <div class="actions">
+        <button class="primary" onclick="addToCart(${p.id},'buy')">Buy</button>
+        ${p.rent>0?`<button class="secondary" onclick="addToCart(${p.id},'rent')">Rent</button>`:""}
+      </div>
+    </div>
+  `).join("") || "<p>No products found.</p>";
+}
+
+function addToCart(id,type){
+  const p=products.find(x=>x.id===id);
+  if(!p)return;
+  cart.push({id:p.id,type,days:1,qty:1});
+  renderCart();
+  alert("Product cart mein add ho gaya!");
+}
+
+function itemPrice(item){
+  const p=products.find(x=>x.id===item.id);
+  if(!p)return 0;
+  return item.type==="buy"?p.buy*item.qty:p.rent*item.days*item.qty;
+}
+
+function renderCart(){
+  const area=document.getElementById("cartItems");
+  if(!cart.length){
+    area.innerHTML="<p>Your cart is empty.</p>";
+  }else{
+    area.innerHTML=cart.map((item,i)=>{
+      const p=products.find(x=>x.id===item.id);
+      if(!p)return "";
+      return `<div class="cartrow">
+        <div><b>${p.name}</b>
+        <small>${item.type==="buy"?"Buy":"Rent"} | ₹${itemPrice(item)}</small>
+        ${item.type==="rent"?`<small>Days: <input style="width:75px" type="number" min="1" value="${item.days}" onchange="changeDays(${i},this.value)"></small>`:""}
+        <small>Quantity: <input style="width:75px" type="number" min="1" value="${item.qty}" onchange="changeQty(${i},this.value)"></small>
+        </div>
+        <button class="danger" onclick="removeCart(${i})">Remove</button>
+      </div>`;
+    }).join("");
+  }
+  const total=cart.reduce((sum,item)=>sum+itemPrice(item),0);
+  document.getElementById("cartTotal").innerText="Total: ₹"+total;
+}
+
+function changeDays(i,value){
+  cart[i].days=Math.max(1,Number(value)||1);
+  renderCart();
+}
+function changeQty(i,value){
+  cart[i].qty=Math.max(1,Number(value)||1);
+  renderCart();
+}
+function removeCart(i){
+  cart.splice(i,1);
+  renderCart();
+}
+function showCheckout(){
+  if(!cart.length){alert("Pehle product add karein.");return;}
+  document.getElementById("checkout").classList.remove("hidden");
+}
+</script>
