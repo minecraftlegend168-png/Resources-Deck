@@ -375,4 +375,147 @@ function showCheckout(){
   if(!cart.length){alert("Pehle product add karein.");return;}
   document.getElementById("checkout").classList.remove("hidden");
 }
+function placeOrder(){
+  const name=document.getElementById("customerName").value.trim();
+  const phone=document.getElementById("customerPhone").value.trim();
+  const address=document.getElementById("customerAddress").value.trim();
+
+  if(!name||!phone||!address){
+    alert("Kripya sabhi details bharein.");
+    return;
+  }
+  if(!/^[0-9]{10}$/.test(phone)){
+    alert("Sahi 10 digit mobile number dalein.");
+    return;
+  }
+  if(!cart.length){
+    alert("Cart empty hai.");
+    return;
+  }
+
+  let message="*New Resources Deck Order*%0A";
+  message+="Name: "+encodeURIComponent(name)+"%0A";
+  message+="Mobile: "+encodeURIComponent(phone)+"%0A";
+  message+="Address: "+encodeURIComponent(address)+"%0A";
+  message+="Payment: Cash on Delivery%0A%0A";
+  message+="*Order Details:*%0A";
+
+  cart.forEach((item)=>{
+    const p=products.find(x=>x.id===item.id);
+    if(!p)return;
+    message+=encodeURIComponent(p.name)+" - ";
+    message+=item.type==="buy"?"Buy":"Rent";
+    message+=" | Qty: "+item.qty;
+    if(item.type==="rent")message+=" | Days: "+item.days;
+    message+=" | ₹"+itemPrice(item)+"%0A";
+  });
+
+  const total=cart.reduce((sum,item)=>sum+itemPrice(item),0);
+  message+="%0ATotal: ₹"+total;
+  message+="%0APlease confirm this order.";
+
+  const url="https://wa.me/"+WHATSAPP_NUMBER+"?text="+message;
+  window.open(url,"_blank");
+
+  alert("WhatsApp khulne par message check karke Send dabayein.");
+}
+
+function loginOwner(){
+  const password=document.getElementById("ownerPassword").value;
+  if(password===OWNER_PASSWORD){
+    document.getElementById("ownerLogin").classList.add("hidden");
+    document.getElementById("ownerPanel").classList.remove("hidden");
+    renderManage();
+  }else{
+    alert("Wrong password!");
+  }
+}
+
+function logoutOwner(){
+  document.getElementById("ownerPanel").classList.add("hidden");
+  document.getElementById("ownerLogin").classList.remove("hidden");
+  document.getElementById("ownerPassword").value="";
+}
+
+function saveProduct(){
+  const id=document.getElementById("editId").value;
+  const name=document.getElementById("pName").value.trim();
+  const cat=document.getElementById("pCategory").value;
+  const buy=Number(document.getElementById("pBuy").value);
+  const rent=Number(document.getElementById("pRent").value);
+  const emoji=document.getElementById("pEmoji").value.trim()||"📦";
+  const image=document.getElementById("pImage").value.trim();
+
+  if(!name||!Number.isFinite(buy)||buy<=0){
+    alert("Product name aur sahi buy price dalein.");
+    return;
+  }
+  if(!Number.isFinite(rent)||rent<0||rent>30){
+    alert("Rent price ₹0 se ₹30 ke beech honi chahiye.");
+    return;
+  }
+
+  const product={id:id?Number(id):Date.now(),name,cat,buy,rent,emoji,image};
+
+  if(id){
+    const index=products.findIndex(p=>p.id===Number(id));
+    if(index!==-1)products[index]=product;
+  }else{
+    products.push(product);
+  }
+
+  saveData();
+  clearProductForm();
+  renderProducts();
+  renderManage();
+  alert("Product save ho gaya!");
+}
+
+function clearProductForm(){
+  ["editId","pName","pBuy","pRent","pEmoji","pImage"].forEach(id=>{
+    document.getElementById(id).value="";
+  });
+}
+
+function editProduct(id){
+  const p=products.find(x=>x.id===id);
+  if(!p)return;
+  document.getElementById("editId").value=p.id;
+  document.getElementById("pName").value=p.name;
+  document.getElementById("pCategory").value=p.cat;
+  document.getElementById("pBuy").value=p.buy;
+  document.getElementById("pRent").value=p.rent;
+  document.getElementById("pEmoji").value=p.emoji||"";
+  document.getElementById("pImage").value=p.image||"";
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function deleteProduct(id){
+  if(!confirm("Kya aap is product ko delete karna chahte hain?"))return;
+  products=products.filter(p=>p.id!==id);
+  saveData();
+  renderProducts();
+  renderManage();
+}
+
+function renderManage(){
+  const area=document.getElementById("manageProducts");
+  if(!area)return;
+  area.innerHTML=products.map(p=>`
+    <div class="cartrow">
+      <div>
+        <b>${p.emoji||"📦"} ${p.name}</b>
+        <small>Buy ₹${p.buy} | Rent ₹${p.rent}/day</small>
+      </div>
+      <div class="actions">
+        <button class="secondary" onclick="editProduct(${p.id})">Edit</button>
+        <button class="danger" onclick="deleteProduct(${p.id})">Delete</button>
+      </div>
+    </div>
+  `).join("");
+}
+
+renderProducts();
 </script>
+</body>
+</html>
