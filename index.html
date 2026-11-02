@@ -1,320 +1,537 @@
+
 <!DOCTYPE html>
 <html lang="hi">
 <head>
-  <link rel="manifest" href="/Resources-Deck/manifest.json">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#173f35">
-<title>Resources Deck | School Store & Rental</title>
+<meta name="theme-color" content="#176b4d">
+<title>Resources Deck</title>
+
 <style>
-:root{--green:#173f35;--mint:#e9f4ee;--cream:#fbf8f1;--orange:#f2a65a;--ink:#1d2925;--muted:#66736d;--white:#fff;--line:#dfe8e2}
-*{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--ink);font-family:Arial,Helvetica,sans-serif}
-header{background:var(--green);color:white;padding:18px 5%;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
-.brand{font-size:1.25rem;font-weight:800;letter-spacing:.2px}.brand span{color:#f6c78e}
-nav{display:flex;gap:8px;flex-wrap:wrap}button,.btn{border:0;border-radius:12px;padding:10px 14px;font-weight:700;cursor:pointer}
-nav button{background:transparent;color:white}nav button.active,nav button:hover{background:#ffffff20}
-.hero{padding:44px 5%;background:linear-gradient(120deg,#e9f4ee,#fbf8f1);display:grid;grid-template-columns:1.4fr 1fr;gap:24px;align-items:center}
-.hero h1{font-size:clamp(2rem,5vw,3.5rem);line-height:1.05;margin:8px 0 14px;color:var(--green)}.hero p{color:var(--muted);font-size:1.05rem;line-height:1.6;max-width:580px}
-.tag{display:inline-block;background:#fff;border:1px solid var(--line);border-radius:30px;padding:7px 12px;color:var(--green);font-size:.85rem;font-weight:700}
-.hero-card{background:white;border:1px solid var(--line);border-radius:24px;padding:25px;box-shadow:0 12px 35px #173f3510}.hero-card .emoji{font-size:3.3rem}.hero-card h3{margin:8px 0}.hero-card p{font-size:.95rem}
-.primary{background:var(--green);color:white}.secondary{background:var(--mint);color:var(--green)}.accent{background:var(--orange);color:#352313}
-main{padding:28px 5% 55px;max-width:1400px;margin:auto}.toolbar{display:flex;gap:12px;justify-content:space-between;align-items:center;flex-wrap:wrap;margin-bottom:18px}
-h2{color:var(--green);margin:0 0 8px}.muted{color:var(--muted)}.filters{display:flex;gap:8px;flex-wrap:wrap}.filters button{background:white;border:1px solid var(--line);color:var(--green)}.filters button.active{background:var(--green);color:white}
-.search{padding:12px 14px;border:1px solid var(--line);border-radius:12px;min-width:min(100%,260px);font-size:1rem}
-.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
-.product{background:white;border:1px solid var(--line);border-radius:18px;padding:16px;display:flex;flex-direction:column;gap:10px}
-.product-art{height:112px;background:var(--mint);border-radius:14px;display:grid;place-items:center;font-size:3rem}.product h3{margin:0;font-size:1.05rem}.product .meta{font-size:.88rem;color:var(--muted)}.price{font-size:1.1rem;font-weight:800;color:var(--green)}.price small{font-size:.78rem;font-weight:500;color:var(--muted)}
-.actions{display:flex;gap:8px;margin-top:auto}.actions button{flex:1;padding:10px 8px}
-.panel{display:none;background:white;border:1px solid var(--line);border-radius:18px;padding:20px;margin-top:22px}.panel.show{display:block}.form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.field{display:flex;flex-direction:column;gap:6px}.field label{font-size:.9rem;font-weight:700}.field input,.field select,.field textarea{width:100%;padding:11px;border:1px solid var(--line);border-radius:10px;font:inherit;background:white}.field.full{grid-column:1/-1}
-.cart-line{display:flex;justify-content:space-between;gap:10px;border-bottom:1px solid var(--line);padding:12px 0;align-items:center}.cart-line button{padding:6px 9px;background:#fbe9e6;color:#963e32}.summary{background:var(--mint);border-radius:14px;padding:15px;margin-top:14px}.summary p{display:flex;justify-content:space-between;margin:8px 0}.notice{background:#fff4df;border:1px solid #f1d6a5;border-radius:12px;padding:12px;margin:14px 0;color:#684719;font-size:.9rem}
-.empty{padding:25px;text-align:center;color:var(--muted)}footer{background:var(--green);color:#e9f4ee;padding:25px 5%;text-align:center;font-size:.9rem}
-.toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:#172d25;color:white;padding:12px 18px;border-radius:12px;display:none;z-index:10;max-width:90%;text-align:center}
-@media(max-width:950px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.hero{grid-template-columns:1fr}.hero-card{max-width:500px}}
-@media(max-width:540px){header{padding:15px 4%}.hero,main{padding-left:4%;padding-right:4%}.grid{grid-template-columns:1fr 1fr;gap:10px}.product{padding:10px}.product-art{height:85px;font-size:2.4rem}.product h3{font-size:.95rem}.actions{flex-direction:column}.form-grid{grid-template-columns:1fr}.field.full{grid-column:auto}.hero{padding-top:30px;padding-bottom:30px}}
+*{box-sizing:border-box}
+body{
+ margin:0;
+ font-family:Arial,sans-serif;
+ background:#f4f7f4;
+ color:#24352c;
+}
+header{
+ background:#176b4d;
+ color:white;
+ padding:20px;
+ text-align:center;
+}
+header h1{margin:0 0 8px}
+nav{
+ display:flex;
+ justify-content:center;
+ flex-wrap:wrap;
+ gap:8px;
+ padding:12px;
+ background:white;
+ position:sticky;
+ top:0;
+ z-index:5;
+ box-shadow:0 2px 6px #0001;
+}
+button{
+ border:0;
+ border-radius:7px;
+ padding:10px 15px;
+ background:#176b4d;
+ color:white;
+ cursor:pointer;
+}
+nav button{background:#e5f1e9;color:#176b4d}
+nav button:hover{background:#cce6d5}
+.container{padding:16px;max-width:1100px;margin:auto}
+input,select,textarea{
+ width:100%;
+ padding:11px;
+ margin:7px 0 13px;
+ border:1px solid #ccd7ce;
+ border-radius:7px;
+ font-size:15px;
+}
+label{font-weight:bold}
+.products{
+ display:grid;
+ grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
+ gap:15px;
+}
+.card{
+ background:white;
+ border-radius:12px;
+ padding:13px;
+ box-shadow:0 2px 8px #0001;
+}
+.card img{
+ width:100%;
+ height:160px;
+ object-fit:cover;
+ border-radius:8px;
+ background:#eee;
+}
+.card h3{margin:10px 0 5px}
+.price{color:#176b4d;font-weight:bold}
+.small{font-size:13px;color:#66756b}
+.section{display:none}
+.section.active{display:block}
+.panel{
+ background:white;
+ padding:17px;
+ border-radius:12px;
+ margin:12px 0;
+}
+.actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}
+.actions button{flex:1}
+.danger{background:#b83232}
+.secondary{background:#65756b}
+hr{border:0;border-top:1px solid #e2e8e3;margin:15px 0}
 </style>
 </head>
-<body>
-<header>
-  <div class="brand">📚 Resources <span>Deck</span></div>
-  <nav>
-    <button class="active" data-view="store">Store</button>
-    <button data-view="cart">Cart <span id="cartCount">0</span></button>
-    <button data-view="listing">Sell / Rent</button>
-  </nav>
-</header>
-<section class="hero">
-  <div>
-    <span class="tag">BUY • RENT • REUSE</span>
-    <h1>School supplies,<br>made simpler.</h1>
-    <p>Books, stationery, bags, uniforms aur study essentials ek hi jagah. Zaroorat ke hisaab se kharidein ya rent par lein.</p>
-    <button class="primary" onclick="document.getElementById('catalog').scrollIntoView({behavior:'smooth'})">Explore products ↓</button>
-  </div>
-  <div class="hero-card">
-    <div class="emoji">🎒 📖 ✏️</div>
-    <h3>Smart student shopping</h3>
-    <p>Budget-friendly choices, rental options aur simple listings — students aur families ke liye.</p>
-    <span class="tag">Demo website</span>
-  </div>
-</section>
-<main>
-  <section id="catalog">
-    <div class="toolbar">
-      <div><h2>Explore products</h2><div class="muted">Choose Buy or Rent for each item.</div></div>
-      <input class="search" id="search" placeholder="Search books, bags..." aria-label="Search products">
-    </div>
-    <div class="toolbar">
-      <div class="filters" id="filters">
-        <button class="active" data-cat="All">All</button><button data-cat="Books">Books</button><button data-cat="Stationery">Stationery</button><button data-cat="Bags">Bags</button><button data-cat="Uniforms">Uniforms</button><button data-cat="Electronics">Electronics</button>
-      </div>
-    </div>
-    <div class="grid" id="products"></div>
-  </section>
 
-  <section id="cartPanel" class="panel">
-    <h2>Your cart</h2><p class="muted">Check your selected products before continuing.</p>
-    <div id="cartItems"></div>
-    <div id="cartSummary"></div>
-    <div class="notice">Demo only: checkout yahan real order ya payment process nahi karta.</div>
-    <button class="primary" onclick="checkout()">Continue to checkout</button>
-  </section>
-
-  <section id="listingPanel" class="panel">
-    <h2>Sell or rent your item</h2>
-    <p class="muted">Apni school book ya supply ki demo listing banayein.</p>
-    <form id="listingForm" class="form-grid">
-      <div class="field"><label for="itemName">Product name</label><input id="itemName" required placeholder="e.g. Class 9 Science book"></div>
-      <div class="field"><label for="itemCategory">Category</label><select id="itemCategory"><option>Books</option><option>Stationery</option><option>Bags</option><option>Uniforms</option><option>Electronics</option></select></div>
-      <div class="field"><label for="itemMode">Listing type</label><select id="itemMode"><option>Rent</option><option>Sell</option></select></div>
-      <div class="field"><label for="itemPrice">Price (₹)</label><input id="itemPrice" type="number" min="1" required placeholder="e.g. 150"></div>
-      <div class="field full"><label for="itemDesc">Description</label><textarea id="itemDesc" rows="3" placeholder="Condition, class, details..."></textarea></div>
-      <div class="field full"><button class="primary" type="submit">Add demo listing</button></div>
-    </form>
-    <div id="listingResult"></div>
-  </section>
-</main>
-<footer>
-  <strong>Resources Deck</strong><br>
-  School Store & Rental • Static demo website<br>
-  <span>Real orders, user accounts, payments aur saved listings ke liye backend integration zaroori hai.</span>
-</footer>
-<div class="toast" id="toast"></div>
-<script>
-const items = [
-{id:1,name:"NCERT Science Book",cat:"Books",emoji:"📘",buy:95,rent:8,deposit:100},
-{id:2,name:"Mathematics Textbook",cat:"Books",emoji:"📗",buy:120,rent:10,deposit:120},
-{id:3,name:"Student Stationery Kit",cat:"Stationery",emoji:"✏️",buy:180,rent:0,deposit:0},
-{id:4,name:"Everyday School Backpack",cat:"Bags",emoji:"🎒",buy:650,rent:25,deposit:250},
-{id:5,name:"School Uniform Set",cat:"Uniforms",emoji:"👕",buy:500,rent:20,deposit:200},
-{id:6,name:"Scientific Calculator",cat:"Electronics",emoji:"🧮",buy:850,rent:30,deposit:300},
-{id:7,name:"Geometry Box",cat:"Stationery",emoji:"📐",buy:90,rent:5,deposit:40},
-{id:8,name:"Exam Preparation Guide",cat:"Books",emoji:"📚",buy:220,rent:12,deposit:150}
-];
-let cart=[], category="All", view="store";
-const money=n=>"₹"+Number(n).toLocaleString("en-IN");
-function toast(msg){const el=document.getElementById("toast");el.textContent=msg;el.style.display="block";setTimeout(()=>el.style.display="none",2300)}
-function renderProducts(){
- const q=document.getElementById("search").value.toLowerCase();
- const list=items.filter(p=>(category==="All"||p.cat===category)&&p.name.toLowerCase().includes(q));
- document.getElementById("products").innerHTML=list.map(p=>`<article class="product"><div class="product-art">${p.emoji}</div><h3>${p.name}</h3><div class="meta">${p.cat}</div><div class="price">${money(p.buy)} <small>to buy</small></div><div class="meta">${p.rent?money(p.rent)+"/day rent • Deposit "+money(p.deposit):"Buy only"}</div><div class="actions"><button class="primary" onclick="addCart(${p.id},'Buy')">Buy</button>${p.rent?`<button class="secondary" onclick="addCart(${p.id},'Rent')">Rent</button>`:""}</div></article>`).join("")||'<div class="empty">No products found.</div>';
-}
-function addCart(id,mode){const p=items.find(x=>x.id===id);if(mode==="Rent"&&!p.rent)return;cart.push({key:Date.now()+Math.random(),id,mode,days:7});renderCart();toast(p.name+" added to cart");}
-function renderCart(){
- document.getElementById("cartCount").textContent=cart.length;
- const root=document.getElementById("cartItems");
- if(!cart.length){root.innerHTML='<div class="empty">Your cart is empty. Store se koi product add karein.</div>';document.getElementById("cartSummary").innerHTML="";return;}
- root.innerHTML=cart.map(c=>{const p=items.find(x=>x.id===c.id);return `<div class="cart-line"><div><strong>${p.emoji} ${p.name}</strong><div class="muted">${c.mode==="Buy"?"Purchase: "+money(p.buy):`Rent: ${money(p.rent)}/day • Deposit ${money(p.deposit)}`} ${c.mode==="Rent"?`<br><label>Duration: <select onchange="setDays(${c.key},this.value)"><option value="7" ${c.days==7?"selected":""}>7 days</option><option value="15" ${c.days==15?"selected":""}>15 days</option><option value="30" ${c.days==30?"selected":""}>30 days</option></select></label>`:""}</div></div><div><strong>${money(c.mode==="Buy"?p.buy:p.rent*c.days)}</strong><br><button onclick="removeCart(${c.key})">Remove</button></div></div>`}).join("");
- const subtotal=cart.reduce((s,c)=>{const p=items.find(x=>x.id===c.id);return s+(c.mode==="Buy"?p.buy:p.rent*c.days)},0);
- const deposit=cart.reduce((s,c)=>{const p=items.find(x=>x.id===c.id);return s+(c.mode==="Rent"?p.deposit:0)},0);
- document.getElementById("cartSummary").innerHTML=`<div class="summary"><p><span>Subtotal / rent charge</span><strong>${money(subtotal)}</strong></p><p><span>Refundable security deposit</span><strong>${money(deposit)}</strong></p><p><span><strong>Demo total due</strong></span><strong>${money(subtotal+deposit)}</strong></p><p class="muted"><small>Rental total includes selected days. Delivery charges are not included.</small></p></div>`;
-}
-function setDays(key,val){const c=cart.find(x=>x.key===key);if(c)c.days=Number(val);renderCart()}
-function removeCart(key){cart=cart.filter(x=>x.key!==key);renderCart()}
-function checkout(){if(!cart.length){toast("Pehle cart mein product add karein.");return}toast("Demo checkout: real payment/order enabled nahi hai.");}
-function showView(v){view=v;document.querySelectorAll("nav button").forEach(b=>b.classList.toggle("active",b.dataset.view===v));document.getElementById("cartPanel").classList.toggle("show",v==="cart");document.getElementById("listingPanel").classList.toggle("show",v==="listing");document.getElementById("catalog").style.display=v==="store"?"block":"none";if(v==="cart")renderCart();window.scrollTo({top:v==="store"?document.getElementById("catalog").offsetTop-10:document.querySelector("main").offsetTop,behavior:"smooth"})}
-document.querySelectorAll("nav button").forEach(b=>b.addEventListener("click",()=>showView(b.dataset.view)));
-document.querySelectorAll("#filters button").forEach(b=>b.addEventListener("click",()=>{category=b.dataset.cat;document.querySelectorAll("#filters button").forEach(x=>x.classList.toggle("active",x===b));renderProducts()}));
-document.getElementById("search").addEventListener("input",renderProducts);
-document.getElementById("listingForm").addEventListener("submit",e=>{e.preventDefault();const name=document.getElementById("itemName").value;const mode=document.getElementById("itemMode").value;const price=Number(document.getElementById("itemPrice").value);const cat=document.getElementById("itemCategory").value;const desc=document.getElementById("itemDesc").value;document.getElementById("listingResult").innerHTML=`<div class="summary"><strong>Demo listing created: ${name}</strong><p>${cat} • ${mode} • ${money(price)}</p><p>${desc||"No description added."}</p></div>`;e.target.reset();toast("Demo listing added")});
-renderProducts();renderCart();
-</script>
-</body>
-</html>
 <body>
+
 <header>
-  <div class="head">
-    <div>
-      <div class="brand">📚 Resources Deck</div>
-      <div class="tag">Students Buy & Rent Study Materials</div>
-    </div>
-    <nav>
-      <button class="active" onclick="showPage('store',this)">Store</button>
-      <button onclick="showPage('cart',this)">Cart 🛒</button>
-      <button onclick="showPage('owner',this)">Owner</button>
-    </nav>
-  </div>
+ <h1>📚 Resources Deck</h1>
+ <p>Students ke liye ek hi jagah par study resources</p>
 </header>
 
-<main>
-<section id="store">
-  <div class="hero">
-    <h1>Welcome to Resources Deck!</h1>
-    <p>किताबें और पढ़ाई का सामान आसानी से खरीदें या किराये पर लें।</p>
-  </div>
+<nav>
+ <button onclick="showSection('store')">Store</button>
+ <button onclick="showSection('cart')">My Cart</button>
+ <button onclick="showSection('owner')">Owner</button>
+</nav>
 
-  <div class="toolbar">
-    <input id="search" placeholder="Search products..." oninput="renderProducts()">
-    <select id="category" onchange="renderProducts()">
-      <option value="">All Categories</option>
-      <option>Books</option>
-      <option>Stationery</option>
-      <option>Bags</option>
-      <option>Electronics</option>
-      <option>Uniforms</option>
-    </select>
-  </div>
+<main class="container">
 
-  <div id="products" class="grid"></div>
+<section id="store" class="section active">
+ <h2>Explore Resources</h2>
+
+ <input id="search" type="search" placeholder="Product search karein..." oninput="renderProducts()">
+
+ <select id="categoryFilter" onchange="renderProducts()">
+  <option value="all">All Categories</option>
+  <option value="Books">Books</option>
+  <option value="Notes">Notes</option>
+  <option value="Stationery">Stationery</option>
+  <option value="Other">Other</option>
+ </select>
+
+ <div id="productList" class="products"></div>
 </section>
 
-<section id="cart" class="hidden">
-  <div class="hero">
-    <h1>🛒 Your Cart</h1>
-    <p>अपने चुने हुए सामान की जानकारी देखें।</p>
-  </div>
+<section id="cart" class="section">
+ <h2>My Cart</h2>
+ <div id="cartList"></div>
+ <div class="panel">
+  <h3>Order Details</h3>
+
+  <label>Your Name</label>
+  <input id="customerName" placeholder="Apna naam likhein">
+
+  <label>Mobile Number</label>
+  <input id="customerPhone" type="tel" maxlength="10" placeholder="10 digit mobile number">
+
+  <label>Full Address</label>
+  <textarea id="customerAddress" rows="3" placeholder="Apna poora address likhein"></textarea>
+
+  <p><b>Payment Method:</b> Cash on Delivery (COD) only</p>
+  <button onclick="placeOrder()">Confirm Order on WhatsApp</button>
+ </div>
+</section>
+
+<section id="owner" class="section">
+ <h2>Owner Dashboard</h2>
+
+ <div id="ownerLogin" class="panel">
+  <p>Owner login karne ke liye password daalein.</p>
+  <input id="ownerPassword" type="password" placeholder="Owner password">
+  <button onclick="loginOwner()">Login</button>
+ </div>
+
+ <div id="ownerPanel" style="display:none">
   <div class="panel">
-    <div id="cartItems"></div>
-    <div id="cartTotal" class="total">Total: ₹0</div>
-    <button class="primary" onclick="showCheckout()">Proceed to Order</button>
+   <h3>Add / Edit Product</h3>
+
+   <input type="hidden" id="editId">
+
+   <label>Product Name</label>
+   <input id="productName" placeholder="Product ka naam">
+
+   <label>Category</label>
+   <select id="productCategory">
+    <option>Books</option>
+    <option>Notes</option>
+    <option>Stationery</option>
+    <option>Other</option>
+   </select>
+
+   <label>Product Image URL</label>
+   <input id="productImage" placeholder="Image link (optional)">
+
+   <label>Buy Price (₹)</label>
+   <input id="buyPrice" type="number" min="1" placeholder="Buy price">
+
+   <label>Rent Price Per Day (₹) — 1 se 30</label>
+   <input id="rentPrice" type="number" min="1" max="30" placeholder="Rent price per day">
+
+   <label>Description</label>
+   <textarea id="productDescription" rows="3" placeholder="Product ki details"></textarea>
+
+   <button onclick="saveProduct()">Save Product</button>
+   <button class="secondary" onclick="clearForm()">Clear Form</button>
   </div>
 
-  <div id="checkout" class="panel hidden">
-    <h2>Delivery Details</h2>
-    <div class="form-grid">
-      <div class="field">
-        <label>Customer Name</label>
-        <input id="customerName" placeholder="अपना नाम लिखें">
-      </div>
-      <div class="field">
-        <label>Mobile Number</label>
-        <input id="customerPhone" type="tel" maxlength="10" placeholder="10 digit mobile number">
-      </div>
-      <div class="field full">
-        <label>Full Delivery Address</label>
-        <textarea id="customerAddress" rows="3" placeholder="पूरा पता लिखें"></textarea>
-      </div>
-    </div>
-    <div class="notice">Payment Method: केवल Cash on Delivery (COD)</div>
-    <button class="primary" onclick="placeOrder()">Confirm Order on WhatsApp</button>
+  <div class="panel">
+   <h3>Manage Products</h3>
+   <div id="manageProducts"></div>
   </div>
+
+  <button class="secondary" onclick="logoutOwner()">Logout</button>
+ </div>
 </section>
 
-<section id="owner" class="hidden">
-  <div class="hero">
-    <h1>⚙️ Owner Dashboard</h1>
-    <p>अपने प्रोडक्ट जोड़ें, कीमत बदलें और सामान हटाएँ।</p>
-  </div>
-
-  <div id="ownerLogin" class="panel">
-    <h3>Owner Login</h3>
-    <div class="field">
-      <label>Owner Password</label>
-      <input id="ownerPassword" type="password" placeholder="Password">
-    </div>
-    <button class="primary" onclick="loginOwner()">Login</button>
-  </div>
-
-  <div id="ownerPanel" class="panel hidden">
-    <h2>Add / Edit Product</h2>
-    <input id="editId" type="hidden">
-    <div class="form-grid">
-      <div class="field">
-        <label>Product Name</label>
-        <input id="pName" placeholder="Product name">
-      </div>
-      <div class="field">
-        <label>Category</label>
-        <select id="pCategory">
-          <option>Books</option>
-          <option>Stationery</option>
-          <option>Bags</option>
-          <option>Electronics</option>
-          <option>Uniforms</option>
-        </select>
-      </div>
-      <div class="field">
-        <label>Buy Price (₹)</label>
-        <input id="pBuy" type="number" min="1" placeholder="Buy price">
-      </div>
-      <div class="field">
-        <label>Rent Price Per Day (₹1–₹30)</label>
-        <input id="pRent" type="number" min="0" max="30" placeholder="Rent price">
-      </div>
-      <div class="field">
-        <label>Product Emoji</label>
-        <input id="pEmoji" placeholder="📘">
-      </div>
-      <div class="field">
-        <label>Image URL (optional)</label>
-        <input id="pImage" placeholder="Image link">
-      </div>
-    </div>
-    <div class="actions" style="margin-top:14px">
-      <button class="primary" onclick="saveProduct()">Save Product</button>
-      <button class="secondary" onclick="clearProductForm()">Clear Form</button>
-      <button class="danger" onclick="logoutOwner()">Logout</button>
-    </div>
-    <hr>
-    <h3>Manage Products</h3>
-    <div id="manageProducts"></div>
-  </div>
-</section>
 </main>
 
-<footer>© 2026 Resources Deck | Student Marketplace</footer>
-
 <script>
-const OWNER_PASSWORD = "2016045826599715";
 const WHATSAPP_NUMBER = "919582398579";
 
+// Apna private password yahan khud set karein.
+// Is password ko kisi ke saath share na karein.
+const OWNER_PASSWORD = "CHANGE_THIS_PASSWORD";
+
 const defaultProducts = [
-{id:1,name:"NCERT Science Book",cat:"Books",emoji:"📘",buy:95,rent:8},
-{id:2,name:"Mathematics Textbook",cat:"Books",emoji:"📗",buy:120,rent:10},
-{id:3,name:"Student Stationery Kit",cat:"Stationery",emoji:"✏️",buy:180,rent:0},
-{id:4,name:"Everyday School Backpack",cat:"Bags",emoji:"🎒",buy:650,rent:25},
-{id:5,name:"Scientific Calculator",cat:"Electronics",emoji:"🧮",buy:850,rent:30},
-{id:6,name:"Geometry Box",cat:"Stationery",emoji:"📐",buy:90,rent:5},
-{id:7,name:"Exam Preparation Guide",cat:"Books",emoji:"📚",buy:220,rent:12}
+ {
+  id:1,name:"NCERT Science Book",category:"Books",
+  image:"",buy:95,rent:8,
+  description:"Science study book"
+ },
+ {
+  id:2,name:"Mathematics Textbook",category:"Books",
+  image:"",buy:120,rent:10,
+  description:"Mathematics textbook"
+ },
+ {
+  id:3,name:"Student Stationery Kit",category:"Stationery",
+  image:"",buy:180,rent:5,
+  description:"Useful stationery items"
+ },
+ {
+  id:4,name:"School Backpack",category:"Other",
+  image:"",buy:650,rent:25,
+  description:"Student backpack"
+ },
+ {
+  id:5,name:"Scientific Calculator",category:"Stationery",
+  image:"",buy:850,rent:30,
+  description:"Scientific calculator"
+ },
+ {
+  id:6,name:"Geometry Box",category:"Stationery",
+  image:"",buy:90,rent:5,
+  description:"Geometry box"
+ },
+ {
+  id:7,name:"Exam Preparation Guide",category:"Books",
+  image:"",buy:220,rent:12,
+  description:"Exam preparation guide"
+ },
+ {
+  id:8,name:"Study Notes",category:"Notes",
+  image:"",buy:50,rent:3,
+  description:"Helpful study notes"
+ }
 ];
 
-let products = JSON.parse(localStorage.getItem("rd_products") || "null") || defaultProducts;
-let cart = [];
-
-function saveData(){
-  localStorage.setItem("rd_products",JSON.stringify(products));
+function loadProducts(){
+ try{
+  const saved=localStorage.getItem("rd_products");
+  return saved ? JSON.parse(saved) : defaultProducts;
+ }catch(e){
+  return defaultProducts;
+ }
 }
 
-function showPage(page,btn){
-  document.querySelectorAll("main section").forEach(s=>s.classList.add("hidden"));
-  document.getElementById(page).classList.remove("hidden");
-  document.querySelectorAll("nav button").forEach(b=>b.classList.remove("active"));
-  if(btn) btn.classList.add("active");
-  if(page==="cart") renderCart();
-  if(page==="owner") renderManage();
+let products=loadProducts();
+let cart=[];
+
+function saveProductsToStorage(){
+ localStorage.setItem("rd_products",JSON.stringify(products));
+}
+
+function showSection(id){
+ document.querySelectorAll(".section").forEach(s=>{
+  s.classList.remove("active");
+ });
+ document.getElementById(id).classList.add("active");
+
+ if(id==="cart") renderCart();
+ if(id==="owner") renderManageProducts();
+}
+
+function safeText(value){
+ return String(value ?? "").replace(/[&<>"']/g,c=>({
+  "&":"&amp;","<":"&lt;",">":"&gt;",
+  '"':"&quot;","'":"&#39;"
+ }[c]));
 }
 
 function renderProducts(){
-  const search=document.getElementById("search").value.toLowerCase();
-  const cat=document.getElementById("category").value;
-  const list=products.filter(p=>
-    p.name.toLowerCase().includes(search) && (!cat || p.cat===cat)
-  );
-  document.getElementById("products").innerHTML=list.map(p=>`
-    <div class="card">
-      <div class="pic">${p.image?`<img src="${p.image}" alt="">`:p.emoji||"📦"}</div>
-      <h3>${p.name}</h3>
-      <div class="muted">${p.cat}</div>
-      <div class="price">Buy: ₹${p.buy}
-      ${p.rent>0?`<br>Rent: ₹${p.rent}/day`:""}</div>
-      <div c
+ const search=document.getElementById("search").value.toLowerCase();
+ const category=document.getElementById("categoryFilter").value;
 
-  
+ const filtered=products.filter(p=>
+  p.name.toLowerCase().includes(search) &&
+  (category==="all" || p.category===category)
+ );
+
+ const list=document.getElementById("productList");
+
+ if(filtered.length===0){
+  list.innerHTML="<p>Koi product nahi mila.</p>";
+  return;
+ }
+
+ list.innerHTML=filtered.map(p=>`
+  <div class="card">
+   <img src="${safeText(p.image || "https://placehold.co/400x250?text=Resources+Deck")}" alt="${safeText(p.name)}" onerror="this.src='https://placehold.co/400x250?text=No+Image'">
+   <h3>${safeText(p.name)}</h3>
+   <p class="small">${safeText(p.category)}</p>
+   <p>${safeText(p.description)}</p>
+   <p class="price">Buy: ₹${p.buy}</p>
+   <p class="price">Rent: ₹${p.rent}/day</p>
+   <div class="actions">
+    <button onclick="addToCart(${p.id},'Buy')">Buy</button>
+    <button onclick="addToCart(${p.id},'Rent')">Rent</button>
+   </div>
+  </div>
+ `).join("");
+}
+
+function addToCart(id,type){
+ const product=products.find(p=>p.id===id);
+ if(!product)return;
+
+ let days=1;
+
+ if(type==="Rent"){
+  const answer=prompt("Kitne din ke liye rent chahiye? (1 se 365)", "7");
+  if(answer===null)return;
+  days=Number(answer);
+  if(!Number.isInteger(days)||days<1||days>365){
+   alert("1 se 365 din ke beech number daalein.");
+   return;
+  }
+ }
+
+ cart.push({
+  id:product.id,
+  type:type,
+  days:days
+ });
+
+ alert("Product cart mein add ho gaya!");
+ renderCart();
+}
+
+function getCartTotal(){
+ return cart.reduce((sum,item)=>{
+  const p=products.find(x=>x.id===item.id);
+  if(!p)return sum;
+  return sum+(item.type==="Buy"?p.buy:p.rent*item.days);
+ },0);
+}
+
+function renderCart(){
+ const list=document.getElementById("cartList");
+
+ if(cart.length===0){
+  list.innerHTML="<p>Your cart is empty.</p>";
+  return;
+ }
+
+ list.innerHTML=cart.map((item,index)=>{
+  const p=products.find(x=>x.id===item.id);
+  if(!p)return "";
+  const price=item.type==="Buy"?p.buy:p.rent*item.days;
+
+  return `
+   <div class="panel">
+    <b>${safeText(p.name)}</b>
+    <p>Order type: ${item.type}</p>
+    ${item.type==="Rent"?`<p>Days: ${item.days}</p>`:""}
+    <p>Price: ₹${price}</p>
+    <button class="danger" onclick="removeCartItem(${index})">Remove</button>
+   </div>
+  `;
+ }).join("");
+
+ list.innerHTML+=`<h3>Total: ₹${getCartTotal()}</h3>`;
+}
+
+function removeCartItem(index){
+ cart.splice(index,1);
+ renderCart();
+}
+
+function placeOrder(){
+ if(cart.length===0){
+  alert("Pehle cart mein product add karein.");
+  return;
+ }
+
+ const name=document.getElementById("customerName").value.trim();
+ const phone=document.getElementById("customerPhone").value.trim();
+ const address=document.getElementById("customerAddress").value.trim();
+
+ if(!name||!phone||!address){
+  alert("Naam, mobile number aur address bharein.");
+  return;
+ }
+
+ if(!/^[6-9]\d{9}$/.test(phone)){
+  alert("Sahi 10 digit mobile number daalein.");
+  return;
+ }
+
+ let message="*New Resources Deck Order*%0A%0A";
+ message+="Name: "+encodeURIComponent(name)+"%0A";
+ message+="Phone: "+encodeURIComponent(phone)+"%0A";
+ message+="Address: "+encodeURIComponent(address)+"%0A";
+ message+="Payment: Cash on Delivery%0A%0A";
+ message+="*Products:*%0A";
+
+ cart.forEach((item,index)=>{
+  const p=products.find(x=>x.id===item.id);
+  if(!p)return;
+  message+=(index+1)+". "+encodeURIComponent(p.name)+"%0A";
+  message+="Type: "+item.type+"%0A";
+  if(item.type==="Rent"){
+   message+="Days: "+item.days+"%0A";
+  }
+  message+="Price: Rs. "+(item.type==="Buy"?p.buy:p.rent*item.days)+"%0A%0A";
+ });
+
+ message+="Total: Rs. "+getCartTotal();
+
+ const url="https://wa.me/"+WHATSAPP_NUMBER+"?text="+message;
+ window.open(url,"_blank");
+}
+
+function loginOwner(){
+ const password=document.getElementById("ownerPassword").value;
+ if(password===2016045826599715){
+  document.getElementById("ownerLogin").style.display="none";
+  document.getElementById("ownerPanel").style.display="block";
+  renderManageProducts();
+ }else{
+  alert("Wrong password!");
+ }
+}
+
+function logoutOwner(){
+ document.getElementById("ownerLogin").style.display="block";
+ document.getElementById("ownerPanel").style.display="none";
+ document.getElementById("ownerPassword").value="";
+}
+
+function saveProduct(){
+ const id=document.getElementById("editId").value;
+ const name=document.getElementById("productName").value.trim();
+ const category=document.getElementById("productCategory").value;
+ const image=document.getElementById("productImage").value.trim();
+ const buy=Number(document.getElementById("buyPrice").value);
+ const rent=Number(document.getElementById("rentPrice").value);
+ const description=document.getElementById("productDescription").value.trim();
+
+ if(!name||!Number.isFinite(buy)||buy<1){
+  alert("Product name aur sahi buy price daalein.");
+  return;
+ }
+
+ if(!Number.isInteger(rent)||rent<1||rent>30){
+  alert("Rent price 1 se 30 rupaye per day hona chahiye.");
+  return;
+ }
+
+ const product={
+  id:id?Number(id):Date.now(),
+  name,category,image,buy,rent,description
+ };
+
+ if(id){
+  products=products.map(p=>p.id===Number(id)?product:p);
+ }else{
+  products.push(product);
+ }
+
+ saveProductsToStorage();
+ clearForm();
+ renderProducts();
+ renderManageProducts();
+ alert("Product save ho gaya!");
+}
+
+function editProduct(id){
+ const p=products.find(x=>x.id===id);
+ if(!p)return;
+
+ document.getElementById("editId").value=p.id;
+ document.getElementById("productName").value=p.name;
+ document.getElementById("productCategory").value=p.category;
+ document.getElementById("productImage").value=p.image||"";
+ document.getElementById("buyPrice").value=p.buy;
+ document.getElementById("rentPrice").value=p.rent;
+ document.getElementById("productDescription").value=p.description||"";
+
+ window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function deleteProduct(id){
+ if(!confirm("Kya aap is product ko delete karna chahte hain?"))return;
+
+ products=products.filter(p=>p.id!==id);
+ saveProductsToStorage();
+ renderProducts();
+ renderManageProducts();
+}
+
+function clearForm(){
+ document.getElementById("editId").value="";
+ document.getElementById("productName").value="";
+ document.getElementById("productCategory").value="Books";
+ document.getElementById("productImage").value="";
+ document.getElementById("buyPrice").value="";
+ document.getElementById("rentPrice").value="";
+ document.getElementById("productDescription").value="";
+}
+
+function renderManageProducts(){
+ const box=document.getElementById("manageProducts");
+ if(!box)return;
+
+ if(products.length===0){
+  box.innerHTML="<p>No products added.</p>";
+  return;
+ }
+
+ box.innerHTML=products.map(p=>`
+  <div class="panel">
+   <b>${safeText(p.name)}</b>
+   <p>Buy: ₹${p.buy} | Rent: ₹${p.rent}/day</p>
+   <div class="actions">
+    <button onclick="editProduct(${p.id})">Edit</button>
+    <button class="danger" onclick="deleteProduct(${p.id})">Delete</button>
+   </div>
+  </div>
+ `).join("");
+}
+
+renderProducts();
+</script>
+
+</body>
+     </html>
+     
